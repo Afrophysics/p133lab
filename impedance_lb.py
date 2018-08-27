@@ -1,6 +1,12 @@
+'''This code is dedicated to the DC circuit observations for a battery with an uknown internal resistance. The goal of this code 
+is to calculate the potential within the battery and the resistance of the internal resistor using a linear fit model for the IV
+diagram of this'''
+
 import numpy as np
 import matplotlib.pyplot as plt
 
+#Set up recorded parameters for applied external resistance from variable resistor box and 
+#the observed potential for the given resistance
 R = np.array([10.2, 40.1, 200, 990, 40000])
 err_r = np.repeat(0.3, len(R))
 V = np.array([0.111, 0.420, 1.760, 4.91, 8.72])
@@ -76,6 +82,7 @@ fig = plt.figure()
 plt.errorbar(x, y, yerr = yerr, fmt='.', label='measured volts')
 smpl_x = np.linspace(0, 0.0109, 31)
 
+#plot the linear approximation
 f_x = rs[1] + (rs[0] * smpl_x)
 plt.plot(smpl_x, f_x, '--', label='%.2f + %.2f I'%(rs[1], rs[0]))
 plt.grid(True)
